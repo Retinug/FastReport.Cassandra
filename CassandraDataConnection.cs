@@ -14,10 +14,10 @@ namespace FastReport.Data
         public override string[] GetTableNames()
         {
             CassandraConnectionStringBuilder builder = new CassandraConnectionStringBuilder(ConnectionString);
-
+            
             Cluster cluster = Cluster.Builder().WithConnectionString(ConnectionString).Build();
             cluster.Connect(builder.DefaultKeyspace);
-
+            
             List<string> tables = cluster.Metadata.GetTables(builder.DefaultKeyspace).ToList();
             cluster.Dispose();
 
@@ -63,40 +63,54 @@ namespace FastReport.Data
             return "Cassandra: " + info;
         }
 
-        public override void FillTableSchema(DataTable table, string selectCommand, CommandParameterCollection parameters)
+        public override DbDataAdapter GetAdapter(string selectCommand, DbConnection connection, CommandParameterCollection parameters)
         {
-            //using (DbConnection conn = GetConnection())
-            //{
-            //    OpenConnection(conn);
-            //    // prepare select command
-            //    selectCommand = PrepareSelectCommand(selectCommand, table.TableName, conn);
-            //    // read the table schema
-            //    using (DbDataAdapter adapter = GetAdapter(selectCommand, conn, parameters))
-            //    {
-            //        adapter.SelectCommand.CommandTimeout = CommandTimeout;
-            //        adapter.FillSchema(table, SchemaType.Source);
-            //    }
-            //}
-            throw new Exception();
+            CqlDataAdapter adapter = new CqlDataAdapter();
+            adapter.SelectCommand = new CqlCommand();
+            adapter.SelectCommand.Connection = connection;
+            adapter.SelectCommand.CommandText = selectCommand;
+            foreach (DbParameter p in parameters)
+            {
+                CqlParameter parameter = new CqlParameter(p.ParameterName, p.Value);
+                adapter.SelectCommand.Parameters.Add(parameter);
+            }
+            return adapter;
         }
 
-        public override void FillTableData(DataTable table, string selectCommand, CommandParameterCollection parameters)
+        public override void FillTableSchema(DataTable table, string selectCommand, CommandParameterCollection parameters)
         {
-            //using (DbConnection conn = GetConnection())
-            //{
-            //    OpenConnection(conn);
-            //    // prepare select command
-            //    selectCommand = PrepareSelectCommand(selectCommand, table.TableName, conn);
-            //    // read the table
-            //    using (DbDataAdapter adapter = GetAdapter(selectCommand, conn, parameters))
-            //    {
-            //        adapter.SelectCommand.CommandTimeout = CommandTimeout;
-            //        table.Clear();
-            //        adapter.Fill(table);
-            //    }
-            //}
-            throw new Exception();
+            CassandraConnectionStringBuilder builder = new CassandraConnectionStringBuilder(ConnectionString);
+
+            using(DbConnection connection = GetConnection())
+            {
+                OpenConnection(connection);
+                selectCommand = $"select * from {builder.DefaultKeyspace}.{table.TableName}";
+
+                using(DbDataAdapter adapter = GetAdapter(selectCommand, connection, parameters))
+                {
+                    adapter.SelectCommand.CommandTimeout = CommandTimeout;
+                    //adapter.FillSchema(table, SchemaType.Source);
+                    adapter.Fill(table);
+                }
+            }
         }
+
+        //public override void FillTableData(DataTable table, string selectCommand, CommandParameterCollection parameters)
+        //{
+        //    CassandraConnectionStringBuilder builder = new CassandraConnectionStringBuilder(ConnectionString);
+
+        //    using (DbConnection connection = GetConnection())
+        //    {
+        //        OpenConnection(connection);
+        //        selectCommand = $"select * from {builder.DefaultKeyspace}.{table.TableName}";
+
+        //        using (DbDataAdapter adapter = GetAdapter(selectCommand, connection, parameters))
+        //        {
+        //            adapter.SelectCommand.CommandTimeout = CommandTimeout;
+        //            adapter.Fill(table);
+        //        }
+        //    }
+        //}
 
 
         public override ConnectionEditorBase GetEditor()

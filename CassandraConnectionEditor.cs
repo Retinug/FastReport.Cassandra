@@ -30,11 +30,12 @@ namespace FastReport.Data
 		protected override string GetConnectionString()
 		{
 			CassandraConnectionStringBuilder builder = new CassandraConnectionStringBuilder(FConnectionString);
-
+			//For test
 			builder.ClusterName = "Test cluster";
 			builder.Username = "cassandra";
 			builder.Password = "cassandra";
 			builder.DefaultKeyspace = "emp";
+
 			//builder.ClusterName = tbClusterName.Text;
 			//builder.Username = tbUserName.Text;
 			//builder.Password = tbPassword.Text;
@@ -50,7 +51,7 @@ namespace FastReport.Data
 			FConnectionString = value;
 
 			CassandraConnectionStringBuilder builder = new CassandraConnectionStringBuilder(value);
-
+			//For test
 			tbClusterName.Text = "Test cluster";
 			tbUserName.Text = "cassandra";
 			tbPassword.Text = "cassandra";
