@@ -32,16 +32,17 @@ namespace FastReport.Data
 			CassandraConnectionStringBuilder builder = new CassandraConnectionStringBuilder(FConnectionString);
 			//For test
 			builder.ClusterName = "Test cluster";
+			builder.DefaultKeyspace = "emp";
+			builder.ContactPoints = new string[1] { tbContactPoint.Text };
 			builder.Username = "cassandra";
 			builder.Password = "cassandra";
-			builder.DefaultKeyspace = "emp";
 
 			//builder.ClusterName = tbClusterName.Text;
 			//builder.Username = tbUserName.Text;
 			//builder.Password = tbPassword.Text;
 			//builder.DefaultKeyspace = tbKeyspace.Text;
 
-			builder.ContactPoints = new string[1] { "127.0.0.1" };
+			
 	  
 			return builder.ToString();
 		}
@@ -53,9 +54,10 @@ namespace FastReport.Data
 			CassandraConnectionStringBuilder builder = new CassandraConnectionStringBuilder(value);
 			//For test
 			tbClusterName.Text = "Test cluster";
+			tbKeyspace.Text = "emp";
+			tbContactPoint.Text = "127.0.0.1";
 			tbUserName.Text = "cassandra";
 			tbPassword.Text = "cassandra";
-			tbKeyspace.Text = "emp";
 
 			//tbClusterName.Text = builder.ClusterName;
 			//tbUserName.Text = builder.Username;

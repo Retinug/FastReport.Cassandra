@@ -29,7 +29,7 @@ namespace FastReport.Data
     private void InitializeComponent()
     {
             this.btnAdvanced = new System.Windows.Forms.Button();
-            this.gbKeyspace = new System.Windows.Forms.GroupBox();
+            this.gbAuthentication = new System.Windows.Forms.GroupBox();
             this.lblKeyspace = new System.Windows.Forms.Label();
             this.tbKeyspace = new System.Windows.Forms.TextBox();
             this.tbPassword = new System.Windows.Forms.TextBox();
@@ -37,18 +37,20 @@ namespace FastReport.Data
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblUserName = new System.Windows.Forms.Label();
             this.label1 = new FastReport.Controls.LabelLine();
-            this.gbServer = new System.Windows.Forms.GroupBox();
+            this.gbServerConnect = new System.Windows.Forms.GroupBox();
             this.lblClusterName = new System.Windows.Forms.Label();
             this.tbClusterName = new System.Windows.Forms.TextBox();
-            this.gbKeyspace.SuspendLayout();
-            this.gbServer.SuspendLayout();
+            this.lblContactPoint = new System.Windows.Forms.Label();
+            this.tbContactPoint = new System.Windows.Forms.TextBox();
+            this.gbAuthentication.SuspendLayout();
+            this.gbServerConnect.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAdvanced
             // 
             this.btnAdvanced.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdvanced.AutoSize = true;
-            this.btnAdvanced.Location = new System.Drawing.Point(252, 220);
+            this.btnAdvanced.Location = new System.Drawing.Point(251, 234);
             this.btnAdvanced.Name = "btnAdvanced";
             this.btnAdvanced.Size = new System.Drawing.Size(77, 23);
             this.btnAdvanced.TabIndex = 0;
@@ -56,21 +58,23 @@ namespace FastReport.Data
             this.btnAdvanced.UseVisualStyleBackColor = true;
             this.btnAdvanced.Click += new System.EventHandler(this.btnAdvanced_Click);
             // 
-            // gbKeyspace
+            // gbAuthentication
             // 
-            this.gbKeyspace.Controls.Add(this.lblKeyspace);
-            this.gbKeyspace.Controls.Add(this.tbKeyspace);
-            this.gbKeyspace.Location = new System.Drawing.Point(8, 136);
-            this.gbKeyspace.Name = "gbKeyspace";
-            this.gbKeyspace.Size = new System.Drawing.Size(320, 76);
-            this.gbKeyspace.TabIndex = 1;
-            this.gbKeyspace.TabStop = false;
-            this.gbKeyspace.Text = "Keyspace";
+            this.gbAuthentication.Controls.Add(this.tbUserName);
+            this.gbAuthentication.Controls.Add(this.lblPassword);
+            this.gbAuthentication.Controls.Add(this.lblUserName);
+            this.gbAuthentication.Controls.Add(this.tbPassword);
+            this.gbAuthentication.Location = new System.Drawing.Point(8, 157);
+            this.gbAuthentication.Name = "gbAuthentication";
+            this.gbAuthentication.Size = new System.Drawing.Size(320, 71);
+            this.gbAuthentication.TabIndex = 1;
+            this.gbAuthentication.TabStop = false;
+            this.gbAuthentication.Text = "Authentication";
             // 
             // lblKeyspace
             // 
             this.lblKeyspace.AutoSize = true;
-            this.lblKeyspace.Location = new System.Drawing.Point(12, 20);
+            this.lblKeyspace.Location = new System.Drawing.Point(9, 63);
             this.lblKeyspace.Name = "lblKeyspace";
             this.lblKeyspace.Size = new System.Drawing.Size(57, 13);
             this.lblKeyspace.TabIndex = 3;
@@ -78,14 +82,14 @@ namespace FastReport.Data
             // 
             // tbKeyspace
             // 
-            this.tbKeyspace.Location = new System.Drawing.Point(12, 40);
+            this.tbKeyspace.Location = new System.Drawing.Point(12, 79);
             this.tbKeyspace.Name = "tbKeyspace";
             this.tbKeyspace.Size = new System.Drawing.Size(296, 20);
             this.tbKeyspace.TabIndex = 0;
             // 
             // tbPassword
             // 
-            this.tbPassword.Location = new System.Drawing.Point(120, 96);
+            this.tbPassword.Location = new System.Drawing.Point(120, 43);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(188, 20);
             this.tbPassword.TabIndex = 2;
@@ -93,7 +97,7 @@ namespace FastReport.Data
             // 
             // tbUserName
             // 
-            this.tbUserName.Location = new System.Drawing.Point(120, 72);
+            this.tbUserName.Location = new System.Drawing.Point(120, 19);
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.Size = new System.Drawing.Size(188, 20);
             this.tbUserName.TabIndex = 1;
@@ -101,7 +105,7 @@ namespace FastReport.Data
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(12, 100);
+            this.lblPassword.Location = new System.Drawing.Point(12, 47);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(57, 13);
             this.lblPassword.TabIndex = 1;
@@ -110,7 +114,7 @@ namespace FastReport.Data
             // lblUserName
             // 
             this.lblUserName.AutoSize = true;
-            this.lblUserName.Location = new System.Drawing.Point(12, 76);
+            this.lblUserName.Location = new System.Drawing.Point(12, 22);
             this.lblUserName.Name = "lblUserName";
             this.lblUserName.Size = new System.Drawing.Size(62, 13);
             this.lblUserName.TabIndex = 0;
@@ -118,30 +122,30 @@ namespace FastReport.Data
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(8, 244);
+            this.label1.Location = new System.Drawing.Point(8, 263);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(320, 17);
             this.label1.TabIndex = 2;
             // 
-            // gbServer
+            // gbServerConnect
             // 
-            this.gbServer.Controls.Add(this.lblClusterName);
-            this.gbServer.Controls.Add(this.tbClusterName);
-            this.gbServer.Controls.Add(this.tbUserName);
-            this.gbServer.Controls.Add(this.tbPassword);
-            this.gbServer.Controls.Add(this.lblUserName);
-            this.gbServer.Controls.Add(this.lblPassword);
-            this.gbServer.Location = new System.Drawing.Point(8, 4);
-            this.gbServer.Name = "gbServer";
-            this.gbServer.Size = new System.Drawing.Size(320, 128);
-            this.gbServer.TabIndex = 3;
-            this.gbServer.TabStop = false;
-            this.gbServer.Text = "Server";
+            this.gbServerConnect.Controls.Add(this.lblContactPoint);
+            this.gbServerConnect.Controls.Add(this.tbContactPoint);
+            this.gbServerConnect.Controls.Add(this.lblKeyspace);
+            this.gbServerConnect.Controls.Add(this.lblClusterName);
+            this.gbServerConnect.Controls.Add(this.tbKeyspace);
+            this.gbServerConnect.Controls.Add(this.tbClusterName);
+            this.gbServerConnect.Location = new System.Drawing.Point(8, 4);
+            this.gbServerConnect.Name = "gbServerConnect";
+            this.gbServerConnect.Size = new System.Drawing.Size(320, 147);
+            this.gbServerConnect.TabIndex = 3;
+            this.gbServerConnect.TabStop = false;
+            this.gbServerConnect.Text = "Server";
             // 
             // lblClusterName
             // 
             this.lblClusterName.AutoSize = true;
-            this.lblClusterName.Location = new System.Drawing.Point(12, 20);
+            this.lblClusterName.Location = new System.Drawing.Point(9, 24);
             this.lblClusterName.Name = "lblClusterName";
             this.lblClusterName.Size = new System.Drawing.Size(74, 13);
             this.lblClusterName.TabIndex = 4;
@@ -154,20 +158,36 @@ namespace FastReport.Data
             this.tbClusterName.Size = new System.Drawing.Size(296, 20);
             this.tbClusterName.TabIndex = 0;
             // 
+            // lblContactPoint
+            // 
+            this.lblContactPoint.AutoSize = true;
+            this.lblContactPoint.Location = new System.Drawing.Point(9, 102);
+            this.lblContactPoint.Name = "lblContactPoint";
+            this.lblContactPoint.Size = new System.Drawing.Size(76, 13);
+            this.lblContactPoint.TabIndex = 6;
+            this.lblContactPoint.Text = "Contact point:";
+            // 
+            // tbContactPoint
+            // 
+            this.tbContactPoint.Location = new System.Drawing.Point(12, 118);
+            this.tbContactPoint.Name = "tbContactPoint";
+            this.tbContactPoint.Size = new System.Drawing.Size(296, 20);
+            this.tbContactPoint.TabIndex = 5;
+            // 
             // CassandraConnectionEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.gbServer);
+            this.Controls.Add(this.gbServerConnect);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.gbKeyspace);
+            this.Controls.Add(this.gbAuthentication);
             this.Controls.Add(this.btnAdvanced);
             this.Name = "CassandraConnectionEditor";
-            this.Size = new System.Drawing.Size(336, 263);
-            this.gbKeyspace.ResumeLayout(false);
-            this.gbKeyspace.PerformLayout();
-            this.gbServer.ResumeLayout(false);
-            this.gbServer.PerformLayout();
+            this.Size = new System.Drawing.Size(336, 283);
+            this.gbAuthentication.ResumeLayout(false);
+            this.gbAuthentication.PerformLayout();
+            this.gbServerConnect.ResumeLayout(false);
+            this.gbServerConnect.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,16 +196,18 @@ namespace FastReport.Data
     #endregion
 
     private System.Windows.Forms.Button btnAdvanced;
-    private System.Windows.Forms.GroupBox gbKeyspace;
+    private System.Windows.Forms.GroupBox gbAuthentication;
     private System.Windows.Forms.Label lblKeyspace;
     private System.Windows.Forms.TextBox tbPassword;
     private System.Windows.Forms.TextBox tbUserName;
     private System.Windows.Forms.Label lblPassword;
     private System.Windows.Forms.Label lblUserName;
     private FastReport.Controls.LabelLine label1;
-    private System.Windows.Forms.GroupBox gbServer;
+    private System.Windows.Forms.GroupBox gbServerConnect;
     private System.Windows.Forms.Label lblClusterName;
     private System.Windows.Forms.TextBox tbClusterName;
     private System.Windows.Forms.TextBox tbKeyspace;
-  }
+        private System.Windows.Forms.Label lblContactPoint;
+        private System.Windows.Forms.TextBox tbContactPoint;
+    }
 }
