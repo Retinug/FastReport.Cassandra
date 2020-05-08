@@ -89,28 +89,10 @@ namespace FastReport.Data
                 using(DbDataAdapter adapter = GetAdapter(selectCommand, connection, parameters))
                 {
                     adapter.SelectCommand.CommandTimeout = CommandTimeout;
-                    //adapter.FillSchema(table, SchemaType.Source);
                     adapter.Fill(table);
                 }
             }
         }
-
-        //public override void FillTableData(DataTable table, string selectCommand, CommandParameterCollection parameters)
-        //{
-        //    CassandraConnectionStringBuilder builder = new CassandraConnectionStringBuilder(ConnectionString);
-
-        //    using (DbConnection connection = GetConnection())
-        //    {
-        //        OpenConnection(connection);
-        //        selectCommand = $"select * from {builder.DefaultKeyspace}.{table.TableName}";
-
-        //        using (DbDataAdapter adapter = GetAdapter(selectCommand, connection, parameters))
-        //        {
-        //            adapter.SelectCommand.CommandTimeout = CommandTimeout;
-        //            adapter.Fill(table);
-        //        }
-        //    }
-        //}
 
 
         public override ConnectionEditorBase GetEditor()

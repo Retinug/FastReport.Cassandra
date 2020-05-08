@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using FastReport.Data.ConnectionEditors;
 using FastReport.Forms;
 using Cassandra;
-using Cassandra.Data;
 
 namespace FastReport.Data
 {
@@ -25,25 +24,27 @@ namespace FastReport.Data
 		private void Localize()
 		{
 			//todo: localize
+			//gbServer.Text =;
+			//lblClusterName.Text =;
+			//lblKeyspace.Text =;
+			//lblContactPoint.Text =;
+
+			//gbAuthentication.Text =;
+			//lblUserName.Text =;
+			//lblPassword.Text =;
+			//btnAdvanced.Text =;
 		}
 
 		protected override string GetConnectionString()
 		{
 			CassandraConnectionStringBuilder builder = new CassandraConnectionStringBuilder(FConnectionString);
-			//For test
-			builder.ClusterName = "Test cluster";
-			builder.DefaultKeyspace = "emp";
+
+			builder.ClusterName = tbClusterName.Text;
+			builder.DefaultKeyspace = tbKeyspace.Text;
 			builder.ContactPoints = new string[1] { tbContactPoint.Text };
-			builder.Username = "cassandra";
-			builder.Password = "cassandra";
+			builder.Username = tbUserName.Text;
+			builder.Password = tbPassword.Text;
 
-			//builder.ClusterName = tbClusterName.Text;
-			//builder.Username = tbUserName.Text;
-			//builder.Password = tbPassword.Text;
-			//builder.DefaultKeyspace = tbKeyspace.Text;
-
-			
-	  
 			return builder.ToString();
 		}
 
@@ -52,17 +53,21 @@ namespace FastReport.Data
 			FConnectionString = value;
 
 			CassandraConnectionStringBuilder builder = new CassandraConnectionStringBuilder(value);
-			//For test
-			tbClusterName.Text = "Test cluster";
-			tbKeyspace.Text = "emp";
-			tbContactPoint.Text = "127.0.0.1";
-			tbUserName.Text = "cassandra";
-			tbPassword.Text = "cassandra";
 
-			//tbClusterName.Text = builder.ClusterName;
-			//tbUserName.Text = builder.Username;
-			//tbPassword.Text = builder.Password;
-			//tbKeyspace.Text = builder.DefaultKeyspace;
+			tbClusterName.Text = builder.ClusterName;
+			tbKeyspace.Text = builder.DefaultKeyspace;
+			try
+			{
+				tbContactPoint.Text = builder.ContactPoints[0];
+			}
+			catch
+			{
+				tbContactPoint.Text = "";
+			}
+
+			tbUserName.Text = builder.Username;
+			tbPassword.Text = builder.Password;
+			
 		}
 
 		public CassandraConnectionEditor()
